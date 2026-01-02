@@ -32,8 +32,9 @@ jobs:
     - name: Upload production-ready build files
       uses: actions/upload-artifact@v4
       with:
-        name: production-files
+        name: production-files-${{ github.run_id }}-${{ github.run_attempt }}
         path: ./dist
+        overwrite: true
 
   deploy:
     environment:
@@ -48,7 +49,7 @@ jobs:
     - name: Download artifact
       uses: actions/download-artifact@v4
       with:
-        name: production-files
+        name: production-files-${{ github.run_id }}-${{ github.run_attempt }}
         path: ./dist
 
     - name: Setup Pages
