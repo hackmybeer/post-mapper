@@ -1,39 +1,39 @@
 # Deutsche Post Mail Labels
 
-A modern web application for processing and formatting address data for Deutsche Post mail labels. Upload your address lists in various formats, map columns to required fields, and export validated data with proper encoding.
+A modern web application for processing and formatting address data for Deutsche Post mail labels. Upload address lists in various formats, map columns to required fields, and export validated data with correct encoding for Deutsche Post tools.
 
 ## ✨ Features
 
-- **Multi-format Support**: Import CSV, Excel (.xlsx, .xls), and OpenDocument (.ods) files
-- **Smart Column Mapping**: Automatic detection and manual override for field mapping
-- **Sender Management**: Configure and persist sender information
-- **Data Validation**: Real-time validation for required fields and length limits
-- **Country Code Mapping**: Automatic conversion to ISO 3166-1 alpha-3 country codes
-- **Export Options**: Download all addresses, or filter by German vs. international addresses
-- **CP1252 Encoding**: Proper Windows-1252 encoding for German special characters (ä, ö, ü, ß, €)
-- **Persistent Storage**: Automatic saving to browser localStorage
-- **Inline Editing**: Edit and delete individual address records
-- **Search & Filter**: Find addresses and show only warnings or missing fields
+- **Multi-format support**: Import CSV, Excel (.xlsx, .xls), and OpenDocument (.ods) files  
+- **Smart column mapping**: Automatic detection with manual override for field mapping  
+- **Sender management**: Configure and persist sender information  
+- **Data validation**: Real-time validation for required fields and length limits  
+- **Country code mapping**: Automatic conversion of country names to ISO 3166-1 alpha-3 codes  
+- **Export options**: Download all addresses, only German, or only international addresses  
+- **CP1252 encoding**: Windows-1252 export with correct handling of ä, ö, ü, ß, €  
+- **Persistent storage**: Automatic saving to browser localStorage  
+- **Inline editing**: Edit and delete individual address records  
+- **Search & filter**: Find addresses and filter by warnings or missing fields  
 
 ## 🚀 Tech Stack
 
-- **React 19** - UI framework
-- **TypeScript** - Type safety
-- **Vite** - Build tool and dev server
-- **Tailwind CSS 4** - Styling with new @import syntax
-- **shadcn/ui** - Component library
-- **Radix UI** - Accessible primitives
-- **PapaParse** - CSV parsing
-- **SheetJS** - Excel/ODS parsing
+- **React 19** – UI framework  
+- **TypeScript** – Type safety  
+- **Vite** – Build tool and dev server  
+- **Tailwind CSS 4** – Utility-first styling with new `@import` syntax  
+- **shadcn/ui** – Headless component library  
+- **Radix UI** – Accessible primitives  
+- **PapaParse** – CSV parsing  
+- **SheetJS** – Excel/ODS parsing  
 
 ## 📋 Prerequisites
 
-- Node.js 18+ 
-- pnpm (recommended) or npm
+- Node.js 18+  
+- pnpm (recommended) or npm  
 
 ## 🛠️ Installation
 
-\`\`\`bash
+```bash
 # Clone the repository
 git clone <repository-url>
 cd deutsche-post-mail-labels
@@ -43,104 +43,111 @@ pnpm install
 
 # Start development server
 pnpm dev
-\`\`\`
+```
 
 ## 🎯 Usage
 
-1. **Upload File**: Drag & drop or select a CSV/Excel/ODS file containing address data
-2. **Map Columns**: Match your file's columns to required fields (Name, Street, PLZ, City, Country, etc.)
-3. **Configure Sender**: Set sender information (appears as first row in export)
-4. **Review Data**: Check mapped addresses, warnings, and validation errors
-5. **Edit Records**: Click Edit on any row to modify data or delete invalid entries
-6. **Export**: Download CSV with all addresses, German only, or international only
+1. **Upload file**: Drag & drop or select a CSV/Excel/ODS file containing address data.  
+2. **Map columns**: Match your file’s columns to required fields (Name, Street, PLZ, City, Country, etc.).  
+3. **Configure sender**: Set sender information (appears as first row in the export).  
+4. **Review data**: Check mapped addresses, warnings, and validation errors.  
+5. **Edit records**: Click *Edit* on any row to modify data or delete invalid entries.  
+6. **Export**: Download CSV with all addresses, only German, or only international addresses.  
 
 ## 📂 Project Structure
 
-\`\`\`
+```text
 src/
 ├── components/
-│   ├── ui/              # shadcn/ui components
+│   ├── ui/               # shadcn/ui components
 │   ├── CountryCombobox.tsx
 │   ├── FileUpload.tsx
 │   └── MappedTable.tsx
 ├── lib/
-│   ├── mapper.ts        # Data mapping and validation logic
-│   └── utils.ts         # Utility functions
+│   ├── mapper.ts         # Data mapping and validation logic
+│   └── utils.ts          # Utility functions
 ├── assets/
-│   └── countries.json   # ISO country code mappings
-├── App.tsx              # Main application component
-├── main.tsx             # Application entry point
-└── index.css            # Global styles with Tailwind
-\`\`\`
+│   └── countries.json    # ISO country code mappings
+├── App.tsx               # Main application component
+├── main.tsx              # Application entry point
+└── index.css             # Global styles with Tailwind
+```
 
 ## 🔧 Development
 
-\`\`\`bash
+```bash
 # Start dev server with hot reload
 pnpm dev
 
-# Type checking
+# Type checking / production build
 pnpm build
 
 # Lint code
 pnpm lint
-\`\`\`
+```
 
 ## 📦 Build
 
-\`\`\`bash
+```bash
 # Build for production
 pnpm build
 
 # Preview production build
 pnpm preview
-\`\`\`
+```
 
-## �� Data Format
+## 📑 Data Format
 
-### Required Fields
-- **Vorname** (First Name)*
-- **Nachname** (Last Name)*
-- **Straße** (Street)*
-- **PLZ** (Postal Code)*
-- **Ort** (City)*
-- **Land** (Country)*
+### Required fields
 
-### Optional Fields
-- **Anrede** (Salutation)
-- **Adresszusatz** (Address Addition)
+- **Vorname** (First name)*  
+- **Nachname** (Last name)*  
+- **Straße** (Street)*  
+- **PLZ** (Postal code)*  
+- **Ort** (City)*  
+- **Land** (Country)*  
 
-### Output Format
-CSV with semicolon delimiters, Windows-1252 encoding:
-\`\`\`
+\*Required for successful export.
+
+### Optional fields
+
+- **Anrede** (Salutation)  
+- **Adresszusatz** (Address addition)  
+
+### Output format
+
+CSV with semicolon delimiters and Windows-1252 encoding:
+
+```text
 NAME;ZUSATZ;STRASSE;NUMMER;PLZ;STADT;LAND;ADRESS_TYP;REFERENZ
-\`\`\`
+```
 
 ## 🌍 Country Codes
 
-The application automatically maps country names to ISO 3166-1 alpha-3 codes:
-- Deutschland → DEU
-- Österreich → AUT
-- Schweiz → CHE
-- USA → USA
-- etc.
+Country names are automatically mapped to ISO 3166-1 alpha-3 codes, for example:
 
-Unmapped countries default to DEU with a warning.
+- Deutschland → DEU  
+- Österreich → AUT  
+- Schweiz → CHE  
+- USA → USA  
+
+Unmapped or unknown countries default to `DEU` and are flagged with a warning in the UI.
 
 ## 💾 Local Storage
 
-Data is automatically persisted to browser localStorage:
-- Uploaded data
-- Column mappings
-- Sender information
-- Mapped addresses
+The following data is automatically persisted in browser localStorage:
 
-Use "Clear All" to reset everything.
+- Uploaded raw data  
+- Column mappings  
+- Sender information  
+- Mapped and edited addresses  
+
+Use the **“Clear All”** action in the UI to remove all stored data and reset the application state.
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit issues and pull requests.
+Contributions are welcome. Open an issue to discuss larger changes and submit pull requests with a clear description of the problem and solution.
 
 ## 📄 License
 
-MIT
+This project is licensed under the **MIT** license.
