@@ -299,10 +299,10 @@ function App() {
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       <div className="container mx-auto max-w-7xl py-10 px-4 sm:px-6 lg:px-8">
         <header className="mb-8 space-y-2">
-          <div className="flex items-start justify-between">
-            <div>
-              <h1 className="text-4xl font-bold tracking-tight">Deutsche Post Mail Labels</h1>
-              <p className="text-lg text-muted-foreground">
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex-1">
+              <h1 className="text-4xl font-bold tracking-tight text-left">Deutsche Post Mail Labels</h1>
+              <p className="text-lg text-muted-foreground mt-1 text-left">
                 Upload and map your address data to the required format
               </p>
             </div>
@@ -360,9 +360,9 @@ function App() {
           <Card>
             <CardHeader>
               <div className="flex items-start justify-between gap-4">
-                <div className="space-y-1">
-                  <CardTitle>Sender Information</CardTitle>
-                  <CardDescription>
+                <div className="flex-1 space-y-1">
+                  <CardTitle className="text-left">Sender Information</CardTitle>
+                  <CardDescription className="text-left">
                     Added as the first row of the exported CSV and hidden from the table.
                   </CardDescription>
                 </div>
@@ -547,7 +547,7 @@ function App() {
                         onValueChange={(value) =>
                           setColumnSelections((prev) => ({
                             ...prev,
-                            [field.key]: value || undefined,
+                            [field.key]: value === "none" ? undefined : value,
                           }))
                         }
                       >
@@ -555,6 +555,11 @@ function App() {
                           <SelectValue placeholder="Select column" />
                         </SelectTrigger>
                         <SelectContent>
+                          {!field.required && (
+                            <SelectItem value="none">
+                              <span className="text-muted-foreground">Not Mapped</span>
+                            </SelectItem>
+                          )}
                           {headers.map((header) => (
                             <SelectItem key={header} value={header}>
                               {header}
